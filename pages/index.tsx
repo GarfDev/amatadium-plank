@@ -6,13 +6,21 @@ import { useForm } from 'react-hook-form';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { fetchSpotifyAccessToken, refreshToken } from '../utils/spotify';
-import { NotificationContainer, NotificationManager } from 'react-notifications';
+import {
+  NotificationContainer,
+  NotificationManager,
+} from 'react-notifications';
 import 'react-notifications/lib/notifications.css';
 
 const inter = Inter({ subsets: ['latin'] });
 
 export default function Home({ host, token, refreshTokenA }) {
-  const { register, handleSubmit, watch, formState: { errors } } = useForm({
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors },
+  } = useForm({
     defaultValues: {
       type: token ? 'spotify' : null,
     },
@@ -32,7 +40,10 @@ export default function Home({ host, token, refreshTokenA }) {
   // Copy the generated link to clipboard
   const copyLink = () => {
     navigator.clipboard.writeText(link);
-    NotificationManager.success('Link has been copied. You can now paste it in OBS!', 'Success! Woo!');
+    NotificationManager.success(
+      'Link has been copied. You can now paste it in OBS!',
+      'Success! Woo!'
+    );
   };
 
   const onSubmit = (data) => {
@@ -63,21 +74,27 @@ export default function Home({ host, token, refreshTokenA }) {
       <div className="flex flex-col min-h-screen pb-10 overflow-y-auto min-w-screen">
         <div className="w-2/3 pt-20 mx-auto">
           <h1 className="text-3xl text-white">
-            Welcome to the <span className="font-bold text-indigo-500">Study Overlay.</span>
+            Welcome to the{' '}
+            <span className="font-bold text-indigo-500">Study Overlay.</span>
           </h1>
           <h3 className="text-gray-400">
-            An easy to use overlay that can be ported directly into OBS and other streaming software to add that special
-            touch.
+            An easy to use overlay that can be ported directly into OBS and
+            other streaming software to add that special touch.
           </h3>
           <div className="grid grid-cols-3 gap-3 pt-4">
             {/* Overlay options */}
             <div className="flex flex-col p-4 text-gray-500 bg-white rounded-xl">
               <h1 className="text-xl font-bold text-black">Pomodoro Timer</h1>
-              <h6>Add a simple but cute pomodoro timer to let others keep track of their studying with you!</h6>
+              <h6>
+                Add a simple but cute pomodoro timer to let others keep track of
+                their studying with you!
+              </h6>
             </div>
             <div className="flex flex-col p-4 text-gray-500 bg-white rounded-xl">
               <h1 className="text-xl font-bold text-black">Spotify Tracker</h1>
-              <h6>Let people see the songs you're listening to while studying.</h6>
+              <h6>
+                Let people see the songs you're listening to while studying.
+              </h6>
             </div>
             <div className="flex flex-col p-4 text-gray-500 bg-white rounded-xl">
               <h1 className="text-xl font-bold text-black">Local Timer</h1>
@@ -86,8 +103,12 @@ export default function Home({ host, token, refreshTokenA }) {
           </div>
           <div>
             <h1 className="my-6 text-xl">
-              This project is independently managed and hosted by Stefan Ciutina. To show support follow me{' '}
-              <Link className="font-bold text-indigo-500" href="https://instagram.com/stfn.c">
+              This project is independently managed and hosted by Stefan
+              Ciutina. To show support follow me{' '}
+              <Link
+                className="font-bold text-indigo-500"
+                href="https://instagram.com/stfn.c"
+              >
                 @stfn.c
               </Link>
               .
@@ -99,16 +120,29 @@ export default function Home({ host, token, refreshTokenA }) {
               <h1>(If you have already setup OBS skip to step 3)</h1>
               <li>Download OBS and open it</li>
               <li>
-                Click add source (bottom left-ish area) and choose the camera option. Then press new and select your
-                camera. You should see it pop up on the main screen now
+                Click add source (bottom left-ish area) and choose the camera
+                option. Then press new and select your camera. You should see it
+                pop up on the main screen now
               </li>
               <li>Scroll down to link generator and select type of overlay</li>
-              <li>Complete details (if you selected pomodoro timer, then add how many minutes of work and rest)</li>
+              <li>
+                Complete details (if you selected pomodoro timer, then add how
+                many minutes of work and rest)
+              </li>
               <li>Press generate link and copy the link</li>
-              <li>Open OBS and click "Add Source" (the plus button in the sources tab)</li>
+              <li>
+                Open OBS and click "Add Source" (the plus button in the sources
+                tab)
+              </li>
               <li>Select "Browser" -&gt; Create New -&gt; Ok</li>
-              <li>Then add the copied URL and change width to 1000 pixels and height to 200 pixels</li>
-              <li>Lastly, add the filter "Chroma Key" to the browser source (this will make the background transparent)</li>
+              <li>
+                Then add the copied URL and change width to 1000 pixels and
+                height to 200 pixels
+              </li>
+              <li>
+                Lastly, add the filter "Chroma Key" to the browser source (this
+                will make the background transparent)
+              </li>
               <li>Enjoy!!</li>
             </ul>
           </div>
@@ -122,12 +156,15 @@ export default function Home({ host, token, refreshTokenA }) {
                 <div className="flex items-center flex-1 pl-4 border border-gray-200 rounded">
                   <input
                     value="pomodoro"
-                    {...register('type', { required: 'Please choose a site type' })}
+                    {...register('type', {
+                      required: 'Please choose a site type',
+                    })}
                     type="radio"
                     className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2"
                   />
                   <label className="w-full py-4 ml-2 text-sm font-medium text-gray-400">
-                    <span className="font-bold text-white">Pomodoro Timer</span> - cute little clock.
+                    <span className="font-bold text-white">Pomodoro Timer</span>{' '}
+                    - cute little clock.
                   </label>
                 </div>
                 <div className="flex items-center flex-1 pl-4 border border-gray-200 rounded">
@@ -138,7 +175,10 @@ export default function Home({ host, token, refreshTokenA }) {
                     className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2"
                   />
                   <label className="w-full py-4 ml-2 text-sm font-medium text-gray-400">
-                    <span className="font-bold text-white">Spotify Tracker</span> - show your current songs.
+                    <span className="font-bold text-white">
+                      Spotify Tracker
+                    </span>{' '}
+                    - show your current songs.
                   </label>
                 </div>
                 <div className="flex items-center flex-1 pl-4 border border-gray-200 rounded">
@@ -149,7 +189,8 @@ export default function Home({ host, token, refreshTokenA }) {
                     className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2"
                   />
                   <label className="w-full py-4 ml-2 text-sm font-medium text-gray-400">
-                    <span className="font-bold text-white">Local time</span> - display local time.
+                    <span className="font-bold text-white">Local time</span> -
+                    display local time.
                   </label>
                 </div>
               </div>
@@ -158,13 +199,19 @@ export default function Home({ host, token, refreshTokenA }) {
               {type === 'pomodoro' && (
                 <div className="flex flex-col gap-2">
                   <input
-                    {...register('workingTime', { required: 'Choose a working time for your pomodoro timer.' })}
+                    {...register('workingTime', {
+                      required:
+                        'Choose a working time for your pomodoro timer.',
+                    })}
                     type="text"
                     className="rounded bg-gray-100 border text-gray-900 focus:ring-blue-500 focus:border-blue-500 block flex-1 min-w-0 w-full text-sm border-gray-800 p-2.5 "
                     placeholder="Work Time (minutes)"
                   />
                   <input
-                    {...register('restTime', { required: 'Choose a resting time for your pomodoro timer.' })}
+                    {...register('restTime', {
+                      required:
+                        'Choose a resting time for your pomodoro timer.',
+                    })}
                     type="text"
                     className="rounded bg-gray-100 border text-gray-900 focus:ring-blue-500 focus:border-blue-500 block flex-1 min-w-0 w-full text-sm border-gray-800 p-2.5 "
                     placeholder="Rest Time (minutes)"
@@ -182,7 +229,9 @@ export default function Home({ host, token, refreshTokenA }) {
               {/* Display generated link */}
               {link && (
                 <div className="mt-4">
-                  <h1 className="font-bold text-white">Your link has been generated! Copy it from below.</h1>
+                  <h1 className="font-bold text-white">
+                    Your link has been generated! Copy it from below.
+                  </h1>
                   <div className="flex gap-4 p-4 text-white bg-indigo-500 rounded-xl">
                     <div className="min-w-[50px] p-1 flex flex-col">
                       <svg
@@ -196,7 +245,14 @@ export default function Home({ host, token, refreshTokenA }) {
                         strokeLinejoin="round"
                         className="hover:cursor-pointer lucide lucide-copy"
                       >
-                        <rect width="14" height="14" x="8" y="8" rx="2" ry="2"></rect>
+                        <rect
+                          width="14"
+                          height="14"
+                          x="8"
+                          y="8"
+                          rx="2"
+                          ry="2"
+                        ></rect>
                         <path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"></path>
                       </svg>
                       <h1 className="mx-auto text-sm text-gray-200">(copy)</h1>
@@ -224,7 +280,10 @@ export default function Home({ host, token, refreshTokenA }) {
                     !type ? 'hover:cursor-not-allowed' : 'test'
                   } mt-4 w-full inline-flex items-center justify-center px-6 py-3 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-indigo-500 hover:bg-indigo-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500`}
                 >
-                  Generate Link {!type && <span className="ml-2">(select an option first)</span>}
+                  Generate Link{' '}
+                  {!type && (
+                    <span className="ml-2">(select an option first)</span>
+                  )}
                 </button>
               )}
 
@@ -239,7 +298,7 @@ export default function Home({ host, token, refreshTokenA }) {
                     onClick={() => {
                       let params = new URLSearchParams({
                         response_type: 'code',
-                        client_id: 'fb31251099ec4a96a54f36d223ceb448',
+                        client_id: '4b834ec0a14b4dbd945ed433a8ea14cb',
                         scope: 'user-read-currently-playing',
                         redirect_uri: host,
                       });
@@ -250,7 +309,8 @@ export default function Home({ host, token, refreshTokenA }) {
                       router.push(url);
                     }}
                   >
-                    Click here to login to Spotify (only works for people with Spotify Premium for now)
+                    Click here to login to Spotify (only works for people with
+                    Spotify Premium for now)
                   </button>
                 </div>
               )}
